@@ -2,8 +2,67 @@ from django.shortcuts import render
 from .models import *
 # Create your views here.
 
-def index(request):
-    pass
+#   получить все книги, которые в наличии и отсортируйте их по названию в алфавитном порядке,
+#   передать список книг в шаблон.
+def task1(request):
+    books = Book.objects.filter(is_available=True).order_by('title')
+    return render(request, 'index.html', {'books': books})
+
+
+#     получить автора по author_id,
+#     получить все книги этого автора, отсортированные по году издания (от новых к старым),
+#     передать в шаблон самого автора и его книги.
+     
+def task2(request):
+    id_a =1 
+    books = Book.objects.filter(author=id_a).order_by("-publication_year")
+    return render(request, 'index2.html', {'books': books})
+
+
+
+from django.db.models import Count, Avg, Min, Max
+
+from django.db.models import Count, Avg, Min, Max
+
+def task3(request):
+    # Получаем статистику по книгам
+    book_stats = Book.objects.aggregate(
+        total_books=Count('id'),
+        avg_price=Avg('price'),
+        min_year=Min('publication_year'),
+        max_year=Max('publication_year')
+    )
+    
+    # Авторы с более чем одной книгой
+    authors = Author.objects.annotate(count_books=Count('book')).filter(count_books__gt=1)
+    
+    return render(request, 'index3.html', {
+        'book_stats': book_stats,
+        'authors': authors
+    })
+
+
+def task4(request):
+    # Задание 4
+    # выбрать книги, которые одновременно:
+    #     дороже 1000 рублей,
+    #     опубликованы до 1980 года,
+    # отсортировать их по убыванию цены,
+    books = Book.objects.filter(price__gt=1000,publication_year__lt=1980).order_by('-price')
+    return render(request, 'index4.html', {'books': books})
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Задание 1.
 
 # Создайте функцию, которая должна: 

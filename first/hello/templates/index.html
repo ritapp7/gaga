@@ -5,6 +5,15 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-
+		<table>
+		{%for book in books%}
+		<tr>
+			<td><h1>{{ book.title }}</h1></td>
+			<td><h1>{{ book.author }}</h1></td>
+			<td><h1>{{ book.publication_year }}</h1></td>
+			<td><h1>{{ book.price }}</h1></td>
+		</tr>
+		{% endfor %}
+		</table>
 	</body>
 </html>

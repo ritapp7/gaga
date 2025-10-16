@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<body>
+	<h1>Книги автора: {{ author.name }}</h1>
+    
+    {% if books %}
+        <ol>
+            {% for book in books %}
+            <li>
+                <strong>{{ book.title }}</strong> ({{ book.publication_year }}) - {{ book.price|floatformat:2 }} руб.
+            </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>У этого автора пока нет книг в каталоге</p>
+    {% endif %}
+</body>
+</html>

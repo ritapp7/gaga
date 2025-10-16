@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Общая статистика</h1>
+    <p>Всего книг: {{ book_stats.total_books }}</p>
+    <p>Средняя цена: {{ book_stats.avg_price|floatformat:2 }}</p>
+    <p>Годы издания: от {{ book_stats.min_year }} до {{ book_stats.max_year }}</p>
+    
+    <h2>Авторы с несколькими книгами</h2>
+    
+    {% if authors %}
+        <table>
+            <tr>
+                <th>Имя автора</th>
+                <th>Количество книг</th>
+            </tr>
+            {% for author in authors %}
+            <tr>
+                <td>{{ author.name }}</td>
+                <td>{{ author.count_books }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Таких авторов нет</p>
+    {% endif %}
+</body>
+</html>

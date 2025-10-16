@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   {% if books %}
+        <table>
+            {% for book in books %}
+            <h1>Дорогие старые книги</h1>
+            <tr>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Год</th>
+                <th>Цена</th>
+            </tr>
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author.name }}</td>
+                <td>{{ book.publication_year }}</td>
+                <td>{{ book.price|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Не найдено дорогих старых книг</p>
+    {% endif %}
+</body>
+</html>
